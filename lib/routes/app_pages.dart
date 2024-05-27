@@ -38,6 +38,7 @@ class AppPages {
                   PublishAdStepOneScreen())),
           GetPage(
               name: Routes.CREATE_AD_STEP_TWO,
+              binding: AuthBinding(),
               page: () => CommonWidget.getScreenSizeFontFixed(
                   PublishAdStepTwoScreen())),
           GetPage(

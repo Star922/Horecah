@@ -67,7 +67,7 @@ class _PublishAdStepTwoScreenState extends State<PublishAdStepTwoScreen> {
                             curve: Curves.easeOut,
                             duration: const Duration(milliseconds: 300),
                           );
-                          return 'This field is required';
+                          return 'require_insert'.tr;
                         }
                         if (val.length < 5) {
                           _scrollController.animateTo(
@@ -75,7 +75,7 @@ class _PublishAdStepTwoScreenState extends State<PublishAdStepTwoScreen> {
                             curve: Curves.easeOut,
                             duration: const Duration(milliseconds: 300),
                           );
-                          return 'Requires at least 5 characters.';
+                          return 'require_least'.tr;
                         } else
                           return null;
                       },
@@ -123,10 +123,10 @@ class _PublishAdStepTwoScreenState extends State<PublishAdStepTwoScreen> {
                               controller: controller.controllerDescription,
                               validator: (val) {
                                 if (val!.isEmpty) {
-                                  return 'This field is required';
+                                  return 'require_insert'.tr;
                                 }
                                 if (val.length < 5) {
-                                  return 'Requires at least 5 characters.';
+                                  return 'require_least'.tr;
                                 }
                                 return null;
                               },
@@ -362,7 +362,7 @@ class _PublishAdStepTwoScreenState extends State<PublishAdStepTwoScreen> {
                             ),
                             onTap: () {
                               if (formKey.currentState!.validate()) {
-                                if (controller.city != '' &&
+                                if (controller.controllerCity.text != '' &&
                                     controller.currenPeopleTypeStr !=
                                         'Select:'.tr) {
                                   if (controller.publishAdModel.value

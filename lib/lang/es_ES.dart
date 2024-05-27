@@ -95,6 +95,7 @@ const Map<String, String> es_ES = {
       'Tu anuncio será revisado por una persona para poder publicarlo.',
   'sign_alert2': '¿Estás seguro de que quieres cerrar sesión?',
   'confirm alert': 'Espere unos minutos. Le enviaremos los resultados después de comprobar el producto.',
+  'confirmerror alert' : 'Tu publicación fue ignorada. Por favor revise el producto cuidadosamente.',
 
   //DROPDOWNS TRADUCCIONES ADTYPE
   'Sell': 'Vendo',

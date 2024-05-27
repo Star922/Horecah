@@ -146,7 +146,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreenWithCustomFlow> {
       controller
           .confirmPayment(controller.productId, controller.period)
           .then((value) {
-        if (value == "true") {
+        if (value != "") {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AfterPayment()));
         }

@@ -95,7 +95,7 @@ const Map<String, String> en_US = {
       'Your ad will be reviewed by a person to be able to publish it',
   'sign_alert2': 'Are you sure you want to log out?',
   'confirm alert' : 'Just wait a few minutes. We will send you the results after checking the product.',
-
+  'confirmerror alert' : 'Your post was ignored. Please check the product carefully.',
   //DROPDOWNS TRADUCCIONES ADTYPE
   'Sell': 'Sell',
   'Buy': 'Buy',

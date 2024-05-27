@@ -61,6 +61,7 @@ class PublishAdController extends GetxController {
   var controllerTelephone = TextEditingController();
   var controllerFax = TextEditingController();
   var controllerReferent = TextEditingController();
+  var controllerCity = TextEditingController();
 
   Rx<bool> postReady = false.obs;
   String peopleType = '';
@@ -85,7 +86,7 @@ class PublishAdController extends GetxController {
   String currentAdTypeStr = "";
   List<dynamic> priceList = [];
   double price = 0;
-  String period = "";
+  String period = "free";
 
   var allCategories = RxList<Category>([]);
 
@@ -101,6 +102,10 @@ class PublishAdController extends GetxController {
     getPostAdHome();
     //getRecentlyProducts();
   }
+  // void dispose() {
+  //   super.dispose();
+
+  // }
 
   bool isActualCategory(EnumCategoryList category) {
     return publishAdModel.value.currentCategory == EnumCategoryList.none
@@ -389,11 +394,11 @@ class PublishAdController extends GetxController {
     var newPost = await apiRepository.publishAd(Products(
         title: controllerTitle.text,
         description: controllerDescription.text,
-        city: city,
+        city: controllerCity.text,
         currency: 'dollar',
         peopleType: this.currenPeopleTypeStr,
         price: double.parse(controllerPrice.text),
-        slug: this.price,
+        slug: this.period,
         phoneNumber: controllerPhone.text.isNotEmpty
             ? int.parse(controllerPhone.text)
             : 0,
@@ -418,7 +423,7 @@ class PublishAdController extends GetxController {
         var confirm = await apiRepository.getConfirm(newPost);
         if (confirm == "cancel") {
           _timer!.cancel();
-          CommonWidget.showModalInfo('confirm alert'.tr, title: '');
+          CommonWidget.showModalInfo('confirmerror alert'.tr, title: '');
         } else if (confirm == "true") {
           _timer!.cancel();
           priceList = await apiRepository.getPrice();
@@ -932,7 +937,7 @@ class PublishAdController extends GetxController {
   Future<void> getPostAdFilter(int serach) async {
     currentAdTypeStr = publishAdModel.value.currenTypeAd == EnumTypeAdList.none
         ? getTypeAdList()[0]
-        : getActualTypeAd(index: 2);
+        : getActualTypeAd(index: 1);
 
     print("ggggggggggg------------------${currentAdTypeStr}");
 
@@ -1157,16 +1162,16 @@ class PublishAdController extends GetxController {
             query += "&_where[ad_type_contains]=Rent";
           else if (currentAdTypeStr == "Rento")
             query += "&_where[ad_type_contains]=Rent";
-          else if (currentAdTypeStr == "Noleggio")
-            query += "&_where[ad_type_contains]=Noleggio";
+          else if (currentAdTypeStr == "Affitto")
+            query += "&_where[ad_type_contains]=Rent";
         } else {
           print("CATEGORIA MUEBLES============");
           if (currentAdTypeStr == "Rent")
             query += "&_where[ad_type_contains]=Rent";
           else if (currentAdTypeStr == "Rento")
             query += "&_where[ad_type_contains]=Rent";
-          else if (currentAdTypeStr == "Affitto")
-            query += "&_where[ad_type_contains]=Rent";
+          else if (currentAdTypeStr == "Noleggio")
+            query += "&_where[ad_type_contains]=Noleggio";
         }
       } else if (currentAdTypeStr == "I am a supplier" ||
           currentAdTypeStr == "Soy proveedor" ||
@@ -1234,7 +1239,7 @@ class PublishAdController extends GetxController {
 
       final products = await apiRepository.getPostsByFilter(query);
 
-      publishAdModel.value.currenTypeAd = EnumTypeAdList.none;
+      if(serach == 1) publishAdModel.value.currenTypeAd = EnumTypeAdList.none;
       if (products != null) {
         this.filtersProducts.value = products;
       }

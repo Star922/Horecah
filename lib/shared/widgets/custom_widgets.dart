@@ -46,7 +46,7 @@ PaymentField(TextEditingController controller) {
       controller: controller,
       validator: (val) {
         if (val!.isEmpty) {
-          return 'This field is required';
+          return 'require_insert'.tr;
         }
         return null;
       },

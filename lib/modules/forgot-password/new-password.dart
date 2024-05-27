@@ -69,7 +69,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                       : local.substring(0, 3) == "en_"
                           ? 'Enter a new password'
                           : 'Ingresa una nueva contraseña',
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.center,
                   style: ThemeConfig.bodyText1.override(
                     color: Color(0xFF3C4858),
                     fontSize: 28,
@@ -152,7 +152,11 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                   ),
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return 'Devi catturare questo campo';
+                      return local.substring(0, 3) == "it_"
+                          ? "Devi catturare questo campo"
+                          : local.substring(0, 3) == "en_"
+                              ? "You must capture this field"
+                              : 'Debes capturar este campo';
                     }
 
                     return null;
@@ -232,7 +236,11 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                   ),
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return 'Devi catturare questo campo';
+                      return local.substring(0, 3) == "it_"
+                          ? "Devi catturare questo campo"
+                          : local.substring(0, 3) == "en_"
+                              ? "You must capture this field"
+                              : 'Debes capturar este campo';
                     }
 
                     return null;
@@ -348,7 +356,11 @@ class IngresarCodigo extends StatelessWidget {
             ),
             validator: (val) {
               if (val!.isEmpty) {
-                return 'Devi catturare questo campo';
+                return local.substring(0, 3) == "it_"
+                    ? "Devi catturare questo campo"
+                    : local.substring(0, 3) == "en_"
+                        ? "You must capture this field"
+                        : 'Debes capturar este campo';
               }
 
               return null;

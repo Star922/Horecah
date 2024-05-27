@@ -105,10 +105,10 @@ class ForgotPasswordPage extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 validator: (val) {
                   if (val!.isEmpty) {
-                    return 'This field is required.';
+                    return 'require_insert'.tr;
                   }
                   if (val.length < 5) {
-                    return 'Requires at least 5 characters.';
+                    return 'require_least'.tr;
                   }
                   return null;
                 },

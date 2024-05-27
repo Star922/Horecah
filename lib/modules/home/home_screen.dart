@@ -71,29 +71,29 @@ class HomeScreen extends GetView<HomeController> {
   Widget _buildContent(MainTabs tab) {
     switch (tab) {
       case MainTabs.home:
-          if (controller.userLogued()) {
-          controller.getRooms(2);
-          for (int i = 0; i < controller.roomsChats.length; i++) {
-            FirebaseFirestore.instance
-                .collection("ChatRoom${controller.roomsChats[i].id}")
-                .snapshots()
-                .listen((snapshot) {
-              int chat_count = 0;
-              for (DocumentSnapshot doc in snapshot.docs) {
-                Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-                if (data['user'] != controller.userStrapi.value!.id) chat_count++;
-              }
-              if (chat_count > controller.chatCount[i]) {
-                controller.showBadge = true.obs;
-                controller.newMsg[i] = controller.roomsChats[i].id!;
-                controller.isTap = false;
-                controller.chatCount[i] = chat_count;
-              }
-            });
-            print("----------------------------${controller.newMsg[i]}");
-          }
-          print("1111111111111111111-${controller.showBadge}");
-        }
+        //   if (controller.userLogued()) {
+        //   controller.getRooms(2);
+        //   for (int i = 0; i < controller.roomsChats.length; i++) {
+        //     FirebaseFirestore.instance
+        //         .collection("ChatRoom${controller.roomsChats[i].id}")
+        //         .snapshots()
+        //         .listen((snapshot) {
+        //       int chat_count = 0;
+        //       for (DocumentSnapshot doc in snapshot.docs) {
+        //         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        //         if (data['user'] != controller.userStrapi.value!.id) chat_count++;
+        //       }
+        //       if (chat_count > controller.chatCount[i]) {
+        //         controller.showBadge = true.obs;
+        //         controller.newMsg[i] = controller.roomsChats[i].id!;
+        //         controller.isTap = false;
+        //         controller.chatCount[i] = chat_count;
+        //       }
+        //     });
+        //     print("----------------------------${controller.newMsg[i]}");
+        //   }
+        //   print("1111111111111111111-${controller.showBadge}");
+        // }
         return controller.mainTab;
       case MainTabs.favorite:
         return controller.discoverTab;

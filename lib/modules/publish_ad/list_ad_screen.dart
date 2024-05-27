@@ -114,10 +114,17 @@ class ListAdScreen extends GetView<PublishAdController> {
                                         isDense: true),
                                     onChanged: (text) {
                                       if (text.length > 1) {
-                                        controller.getPostAdFilter(1);
+                                        index == 1
+                                            ? controller.getPostAdFilter(1)
+                                            : controller.getPostAdFilter(2);
                                       } else if (text.length == 0) {
-                                        controller.getPostAdToFilterScreen(
-                                            2, controller.getActualTypeAd());
+                                        index == 1
+                                            ? controller.getPostAdFilter(1)
+                                            : controller
+                                                .getPostAdToFilterScreen(
+                                                    2,
+                                                    controller.getActualTypeAd(
+                                                        index: 1));
                                       }
                                     },
                                   ),
@@ -140,23 +147,28 @@ class ListAdScreen extends GetView<PublishAdController> {
                     children: [
                       Spacer(),
                       InkWell(
-                        child: Obx(() => Container(
-                            width: 90,
-                            child: index != 1 ?ButtonSecundary('filter'.tr,
-                                color: controller.currentCat.value.color)
-                                :ButtonSecundary('filter'.tr,
-                                color:controller.currentCat.value.color ??Color(0xffFA4B00))
-                                ),),
+                        child: Obx(
+                          () => Container(
+                              width: 90,
+                              child: index != 1
+                                  ? ButtonSecundary('filter'.tr,
+                                      color: controller.currentCat.value.color)
+                                  : ButtonSecundary('filter'.tr,
+                                      color:
+                                          controller.currentCat.value.color ??
+                                              Color(0xffFA4B00))),
+                        ),
                         onTap: () async {
                           //TODO: CONSULTAR SUBCATEGORIAS.
                           if (this.conCategoria == false) {
                             showCategories(context);
-                            print("Done!!!-----------${controller.currentCat.value.color!}");
-
+                            print(
+                                "Done!!!-----------${controller.currentCat.value.color!}");
                           } else {
                             final subCategoriesFilters =
                                 await controller.getSubCategoriesByCategory();
-                            print("Done!!!-----------${controller.currentCat.value.color!}");
+                            print(
+                                "Done!!!-----------${controller.currentCat.value.color!}");
                             print(subCategoriesFilters);
                             showFullModalInfo(context, subCategoriesFilters);
                           }

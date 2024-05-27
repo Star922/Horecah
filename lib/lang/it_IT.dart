@@ -88,7 +88,10 @@ const Map<String, String> it_IT = {
   'ad_revision2':
       'Il tuo annuncio verrà esaminato da una persona per poterlo pubblicare',
   'sign_alert2': 'Sei sicuro di voler uscire?',
-  'confirm alert': 'Aspetta solo qualche minuto. Ti invieremo i risultati dopo aver controllato il prodotto.',
+  'confirm alert':
+      'Aspetta solo qualche minuto. Ti invieremo i risultati dopo aver controllato il prodotto.',
+  'confirmerror alert':
+      'Il tuo post è stato ignorato. Si prega di controllare attentamente il prodotto.',
   //DROPDOWNS TRADUCCIONES ADTYPE
   'Sell': 'Vendo',
   'Buy': 'Compro',

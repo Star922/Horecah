@@ -106,7 +106,7 @@ class _EditProfileState extends State<EditProfile> {
                               curve: Curves.easeOut,
                               duration: const Duration(milliseconds: 300),
                             );
-                            return 'This field is required.';
+                            return 'require_insert'.tr;
                           }
                           if (val.length < 5) {
                             _scrollController.animateTo(
@@ -114,7 +114,7 @@ class _EditProfileState extends State<EditProfile> {
                               curve: Curves.easeOut,
                               duration: const Duration(milliseconds: 300),
                             );
-                            return 'Requires at least 5 characters.';
+                            return 'require_least'.tr;
                           }
                           return null;
                         },
@@ -172,7 +172,7 @@ class _EditProfileState extends State<EditProfile> {
                               curve: Curves.easeOut,
                               duration: const Duration(milliseconds: 300),
                             );
-                            return 'This field is required';
+                            return 'require_insert'.tr;
                           }
                           if (val.length < 5) {
                             _scrollController.animateTo(
@@ -180,7 +180,7 @@ class _EditProfileState extends State<EditProfile> {
                               curve: Curves.easeOut,
                               duration: const Duration(milliseconds: 300),
                             );
-                            return 'Requires at least 5 characters.';
+                            return 'require_least'.tr;
                           }
                           if (!Regex.isEmail(val)) {
                             _scrollController.animateTo(

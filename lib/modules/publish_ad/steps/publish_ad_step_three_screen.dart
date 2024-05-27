@@ -95,7 +95,7 @@ class PublishAdStepThreeScreen extends GetView<PublishAdController> {
                         : "Ubicación",
               ),
               Text(
-                controller.city,
+                controller.controllerCity.text,
                 style: ThemeConfig.bodyText1,
               ),
               SizedBox(

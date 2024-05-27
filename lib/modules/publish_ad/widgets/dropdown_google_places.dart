@@ -22,9 +22,11 @@ class _DropDownGooglePlacesState extends State<DropDownGooglePlaces> {
   GooglePlace googlePlace = GooglePlace(ApiConstants.googleApiKey);
   List<AutocompletePrediction> predictions = [];
   var controller = Get.find<PublishAdController>();
+  var authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     String local = TranslationService.locale.toString();
+    final homeController = Get.find<HomeController>();
 
     return Autocomplete<AutocompletePrediction>(
       optionsBuilder: (TextEditingValue textEditingValue) {
@@ -48,11 +50,9 @@ class _DropDownGooglePlacesState extends State<DropDownGooglePlaces> {
         print("Type ${widget.type}");
         controller.city = selection.description!;
         if (widget.type == "register") {
-          final authController = Get.find<AuthController>();
-          authController.registerAddressController.text =
+        authController.registerAddressController.text =
               selection.description!;
         } else if (widget.type == "edit-profile") {
-          final homeController = Get.find<HomeController>();
           homeController.city.text = selection.description!;
         }
       },
@@ -90,11 +90,16 @@ class _DropDownGooglePlacesState extends State<DropDownGooglePlaces> {
           TextEditingController fieldTextEditingController,
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted) {
-        if (fieldTextEditingController.text == '' && controller.city != '') {
-          fieldTextEditingController.text = controller.city;
+        if (fieldTextEditingController.text == '' && controller.controllerCity.text != '') {
+          fieldTextEditingController.text = controller.controllerCity.text;
         }
+
         return TextField(
-          controller: fieldTextEditingController,
+          controller: widget.type == "register"
+              ? authController.registerAddressController
+              : widget.type == "edit-profile"
+                  ? homeController.city
+                  : controller.controllerCity,
           focusNode: fieldFocusNode,
           decoration: InputDecoration(
               labelText: local.substring(0, 3) == "it_"

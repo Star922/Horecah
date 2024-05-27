@@ -29,6 +29,15 @@ class ForgotPasswordController extends GetxController {
         await this.apiRepository.forgotPassword(this.emailController.text);
     if (res == true) {
       Get.to(() => NewPasswordPage());
+    } else {
+      String local = TranslationService.locale.toString();
+      CommonWidget.showError(
+        local.substring(0, 3) == "it_"
+            ? "La posta non esiste."
+            : local.substring(0, 3) == "en_"
+                ? "Tha mail doesn't exist."
+                : "El correo no existe.",
+      );
     }
   }
 
@@ -39,7 +48,7 @@ class ForgotPasswordController extends GetxController {
         this.emailController.text.trim(),
         this.newPasswordController.text.trim(),
         this.newPasswordConfirmationController.text.trim());
-
+    print(res);
     if (res == true) {
       this.codeController.text = "";
       this.emailController.text = "";

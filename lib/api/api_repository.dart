@@ -161,13 +161,14 @@ class ApiRepository {
     final res = await apiProvider.get(path);
     print(res.body);
     // print("0000000000000000000000status Code!!!!!! ${res.body[1].toString()}");
-    if (res.statusCode == 200) {
+    if (res.statusCode == 200 && res.body != {"message": "No products found"}) {
       return Products.fromListJson(res.body);
-    }
+    } else
+      return [];
   }
 
   Future<String> getConfirm(int id) async {
-    String path = '/confirm-product';
+    String path = '/confirm-product?id=$id';
     final res = await apiProvider.get(path);
     print(res.body);
     // print("0000000000000000000000status Code!!!!!! ${res.body[1].toString()}");
@@ -189,12 +190,12 @@ class ApiRepository {
   }
 
   Future<String> getConfirmPayment(int id, String period) async {
-    String path = '/confirm-payment';
-    final res = await apiProvider.post(path, {"id" : id, "period" : period});
+    String path = '/confirmed-price';
+    final res = await apiProvider.post(path, {"id": id, "period": period});
     print(res.body);
     // print("0000000000000000000000status Code!!!!!! ${res.body[1].toString()}");
     if (res.statusCode == 200) {
-      return res.body;
+      return res.body["servicekind"];
     }
     return "Nothing";
   }
@@ -522,7 +523,8 @@ class ApiRepository {
       "passwordConfirmation": passwordConfirmation
     };
     final res = await apiProvider.post("/auth/reset-password", jsonEncode(map));
-    if (res.body == true) {
+
+    if (res.body == "true") {
       print(res.body);
       return true;
     } else {
